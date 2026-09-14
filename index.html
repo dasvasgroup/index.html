@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Davas Customer Sync</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 24px 16px; background: #f7f7f8; color: #1a1a1a; }
+  h1 { margin-bottom: 4px; }
+  .meta { color: #666; margin-bottom: 24px; }
+  .cards { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .card { background: white; border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-width: 160px; }
+  .card .n { font-size: 28px; font-weight: 700; }
+  .card .l { color: #666; font-size: 13px; }
+  table { border-collapse: collapse; width: 100%; background: white; border-radius: 8px; overflow: hidden; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+  th { background: #efefef; }
+  section { margin-bottom: 32px; max-width: 1100px; }
+  ul { line-height: 1.7; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #111; color: #eee; }
+    .card, table { background: #1c1c1c; }
+    th { background: #2a2a2a; }
+    td, th { border-color: #333; }
+  }
+</style>
+</head>
+<body>
+  <h1>Customer &amp; Sync Dashboard</h1>
+  <p class="meta">Last synced: 2026-09-14T06:10:26.328Z</p>
+
+  <div class="cards">
+    <div class="card"><div class="n">0</div><div class="l">Total customers</div></div>
+    <div class="card"><div class="n">0</div><div class="l">Alarm systems</div></div>
+    <div class="card"><div class="n">0</div><div class="l">Camera systems</div></div>
+    <div class="card"><div class="n">0</div><div class="l">Monitoring</div></div>
+    <div class="card"><div class="n">0</div><div class="l">Unclassified</div></div>
+    <div class="card"><div class="n">0</div><div class="l">Supplier price list items</div></div>
+  </div>
+
+  <section>
+    <h2>Sync status</h2>
+    <ul><li>quickbooks: ⚪ not configured</li>
+<li>servicem8: ⚪ not configured</li>
+<li>outlook: ⚪ not configured</li></ul>
+  </section>
+
+  <section>
+    <h2>Marketing segments</h2>
+    <ul><li><strong>alarm</strong>: 0 customers — <a href="data/segments/alarm.csv">download CSV</a></li>
+<li><strong>camera</strong>: 0 customers — <a href="data/segments/camera.csv">download CSV</a></li>
+<li><strong>monitoring</strong>: 0 customers — <a href="data/segments/monitoring.csv">download CSV</a></li>
+<li><strong>unclassified</strong>: 0 customers — <a href="data/segments/unclassified.csv">download CSV</a></li></ul>
+  </section>
+
+  <section>
+    <h2>Customers (first 500)</h2>
+    <p>Full data: <a href="data/customers.json">data/customers.json</a></p>
+    <table>
+      <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Systems</th><th>Invoiced</th><th>Open balance</th><th>Last activity</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</body>
+</html>

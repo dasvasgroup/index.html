@@ -1,0 +1,44 @@
+name: Daily customer sync
+
+on:
+  schedule:
+    # 06:00 Australia/Brisbane (UTC+10, no DST) = 20:00 UTC the previous day.
+    - cron: "0 20 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run sync
+        env:
+          QBO_CLIENT_ID: ${{ secrets.QBO_CLIENT_ID }}
+          QBO_CLIENT_SECRET: ${{ secrets.QBO_CLIENT_SECRET }}
+          QBO_REFRESH_TOKEN: ${{ secrets.QBO_REFRESH_TOKEN }}
+          QBO_REALM_ID: ${{ secrets.QBO_REALM_ID }}
+          QBO_ENVIRONMENT: ${{ secrets.QBO_ENVIRONMENT }}
+          SM8_API_KEY: ${{ secrets.SM8_API_KEY }}
+          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+          MS_REFRESH_TOKEN: ${{ secrets.MS_REFRESH_TOKEN }}
+        run: node scripts/sync.js
+
+      - name: Commit updated data
+        run: |
+          git config user.name "davas-sync-bot"
+          git config user.email "info@davas.com.au"
+          git add index.html data/
+          git diff --cached --quiet || git commit -m "Daily sync: $(date -u +'%Y-%m-%d')"
+          git push

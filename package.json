@@ -1,0 +1,15 @@
+{
+  "name": "davas-sync",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Daily sync of customers, invoices, quotes and job entries from QuickBooks, ServiceM8 and Outlook into a unified customer database with marketing segments.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "authorize:quickbooks": "node scripts/authorize-quickbooks.js",
+    "authorize:outlook": "node scripts/authorize-outlook.js"
+  }
+}
